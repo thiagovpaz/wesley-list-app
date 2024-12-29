@@ -15,6 +15,8 @@ export const Image = styled.img`
   max-width: 60%;
 `;
 
+export const FormLogin = styled.form``;
+
 export const SectionLogin = styled.section`
   display: flex;
   flex: 1;
@@ -25,7 +27,7 @@ export const SectionLogin = styled.section`
 
 export const SectionForm = styled.section`
   display: flex;
-  height: 200px;
+  height: 230px;
   flex-direction: column;
   justify-content: center;
   align-items: center;

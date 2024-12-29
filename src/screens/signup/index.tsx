@@ -33,7 +33,7 @@ export default function SignUp() {
     <Styled.Container>
       <Styled.Image src={ImageLogin} alt="Logo" />
       <Styled.SectionLogin>
-        <h1>Logins</h1>
+        <h1>Cadastro</h1>
         <Styled.SectionForm>
           <Input
             type="text"

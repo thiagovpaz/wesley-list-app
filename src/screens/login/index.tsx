@@ -36,7 +36,7 @@ export default function Login() {
     <Styled.Container>
       <Styled.Image src={ImageLogin} alt="Logo" />
       <Styled.SectionLogin>
-        <h1>Logins</h1>
+        <h1>Login</h1>
         <Styled.FormLogin onSubmit={(e) => { handleLogin(); e.preventDefault(); }}>
           <Styled.SectionForm>
             <Styled.Section>

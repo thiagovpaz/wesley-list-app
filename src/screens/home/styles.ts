@@ -1,43 +1,41 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+  position: relative;
+  
   display: flex;
   flex: 1;
-  flex-direction: row;
+  flex-direction: column;
 
   height: 100vh;
   width: 100vw;
-`;
 
-export const Image = styled.img`
-  object-fit: cover;
-  object-position: center;
-  max-width: 60%;
-`;
-
-export const SectionLogin = styled.section`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-`;
-
-export const SectionForm = styled.section`
-  display: flex;
-  height: 200px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  justify-content: space-between;
 `;
 
 export const Section = styled.section`
   display: flex;
-  height: 100px;
-  width: 100%;
-  flex-direction: column;
-  justify-content: center;
+  flex: 1;
+  width: 100vh;
   align-items: center;
-  justify-content: space-evenly;
+
+  flex-direction: column;
+`;
+
+export const SectionSearch = styled.section`
+  display: flex;
+  flex-direction: row;
+`;
+
+export const SectionModal = styled.section`
+  height: 250px;
+  width: 350px;
+`;
+
+export const SectionModalButton = styled.section`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
 `;

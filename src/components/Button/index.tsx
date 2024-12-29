@@ -2,7 +2,7 @@ import * as Styled from './styles';
 import { ButtonHTMLAttributes } from 'react';
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant?: "primary" | "secondary"; // Renomeei para `variant` para evitar conflito com o atributo `type`.
+  variant?: "primary" | "secondary";
   title: string
 };
 

@@ -1,15 +1,15 @@
 import * as Styled from './styles';
+import { ButtonHTMLAttributes } from 'react';
 
-type InputProps = {
-  type: "primary" | "secondary";
-  title: string;
-  onClick?: () => void;
-}
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+  variant?: "primary" | "secondary"; // Renomeei para `variant` para evitar conflito com o atributo `type`.
+  title: string
+};
 
-export function Button({ type = "primary", title, onClick }: InputProps) {
+export function Button({ variant = "primary", title, ...rest }: ButtonProps) {
   return (
-    <Styled.Button type={type} onClick={onClick}>
+    <Styled.Button variant={variant} {...rest}>
       {title}
     </Styled.Button>
-  )
+  );
 }

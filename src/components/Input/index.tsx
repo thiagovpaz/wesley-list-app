@@ -1,12 +1,10 @@
 import * as Styled from './styles';
+import { InputHTMLAttributes } from 'react';
 
-type InputProps = {
-  type: string;
-  placeholder: string;
-}
+type InputProps = InputHTMLAttributes<HTMLInputElement>;
 
-export function Input({ type, placeholder }: InputProps) {
+export function Input({ type = "text", placeholder, ...rest }: InputProps) {
   return (
-    <Styled.Input type={type} placeholder={placeholder} />
-  )
+    <Styled.Input type={type} placeholder={placeholder} {...rest} />
+  );
 }

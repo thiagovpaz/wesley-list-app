@@ -1,18 +1,22 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-export const TaskListContainer = styled.div`
-position: absolute;
+export const Container = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Máximo de 3 colunas */
+  grid-template-columns: repeat(1, 1fr); 
   gap: 1rem;
-  justify-content: end; /* Alinha itens à direita */
-  margin-top: 2rem;
+  background-color: #4A90E2;
+  padding: 2rem;
+  border-radius: 10px;
 
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr; /* Alinha como coluna no mobile */
-    justify-content: center; /* Centraliza os itens no mobile */
+  @media (min-width: 600px) {
+    grid-template-columns: repeat(2, 1fr); 
+  }
+
+  @media (min-width: 900px) {
+    grid-template-columns: repeat(3, 1fr); 
   }
 `;
+
 
 export const TaskCard = styled.div`
   padding: 1rem;

@@ -13,6 +13,10 @@ export const Image = styled.img`
   object-fit: cover;
   object-position: center;
   max-width: 60%;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export const FormLogin = styled.form``;

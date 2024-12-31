@@ -14,9 +14,10 @@ type Task = {
 type TaskListProps = {
     handleSelectedTask(id: number): void;
     isModalOpen?: boolean;
+    isEditModalOpen?: boolean;
 }
 
-const TaskList = ({ handleSelectedTask, isModalOpen }: TaskListProps) => {
+const TaskList = ({ handleSelectedTask, isModalOpen, isEditModalOpen }: TaskListProps) => {
     const [tasks, setTasks] = useState<Task[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
     const totalPages = useRef(0);
@@ -42,7 +43,7 @@ const TaskList = ({ handleSelectedTask, isModalOpen }: TaskListProps) => {
         }
 
         fetchTasks();
-    }, [currentPage, isModalOpen]);
+    }, [currentPage, isModalOpen, isEditModalOpen]);
 
     const handlePageChange = (page: number) => {
         setCurrentPage(page);
@@ -54,15 +55,17 @@ const TaskList = ({ handleSelectedTask, isModalOpen }: TaskListProps) => {
                 <p>Loading...</p>
             ) : (
                 <>
-                    {tasks.map((task) => (
-                        <Styled.TaskCard key={task.id} onClick={() => handleSelectedTask(task.id)}>
-                            <h3>{task.title}</h3>
-                            <p>{task.description}</p>
-                            <p>
-                                Status: <strong>{task.status}</strong>
-                            </p>
-                        </Styled.TaskCard>
-                    ))}
+                    <Styled.Container>
+                        {tasks.map((task) => (
+                            <Styled.TaskCard key={task.id} onClick={() => handleSelectedTask(task.id)}>
+                                <h3>{task.title}</h3>
+                                <p>{task.description}</p>
+                                <p>
+                                    Status: <strong>{task.status}</strong>
+                                </p>
+                            </Styled.TaskCard>
+                        ))}
+                    </Styled.Container>
 
                     <Styled.Pagination>
                         {Array.from({ length: totalPages.current }, (_, index) => (

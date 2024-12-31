@@ -43,7 +43,7 @@ export async function GetTasks(page: number) {
     if (access_token) {
         try {
             const response = await axios.get(
-                `http://localhost:3000/task?page=${page}&limit=5`,
+                `http://localhost:3000/task?page=${page}&limit=6`,
                 {
                     headers: {
                         'Content-Type': 'application/json',
@@ -108,9 +108,33 @@ export async function EditTask(id: number, title: string, description: string, s
             return response;
 
         } catch (err) {
-            return window.alert('Erro ao buscar tarefa');
+            return window.alert('Erro ao editar tarefa');
         }
     } else {
-        window.alert('Erro ao buscar tarefa');
+        window.alert('Erro ao editar tarefa');
+    }
+}
+
+export async function RemoveTask(id: number) {
+    const access_token = getAccessToken();
+    if (access_token) {
+        try {
+            const response = await axios.delete(
+                `http://localhost:3000/task/${id}`,
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${access_token}`
+                    }
+                }
+            );
+
+            return response;
+
+        } catch (err) {
+            return window.alert('Erro ao deletar tarefa');
+        }
+    } else {
+        window.alert('Erro ao deletar tarefa');
     }
 }

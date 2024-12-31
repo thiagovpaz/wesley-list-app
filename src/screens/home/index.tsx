@@ -7,7 +7,7 @@ import { Button } from '../../components/Button';
 import { Input } from '../../components/Input';
 import { colors } from '../../global/colors';
 
-import { CreateTask, EditTask, GetOneTask } from '../../services/task/taskService';
+import { CreateTask, EditTask, GetOneTask, RemoveTask } from '../../services/task/taskService';
 import * as Styled from './styles';
 import TaskList from './components/TaskList';
 import { Profile } from '../../components/Profile';
@@ -60,12 +60,22 @@ export default function Home() {
   async function handleSelectedTask(id: number) {
     setIdToEdit(id)
     const data = await GetOneTask(id)
-    console.log('adata:', data)
     setTitle(data?.data?.title)
     setStatus(data?.data?.status)
     setDescription(data?.data?.description)
     setIsEditModalOpen(true)
     return
+  }
+
+  async function handleRemoveTask(id: number) {
+    const data = await RemoveTask(id);
+    if (data?.status == 200) {
+      alert("Tarefa removida")
+      return setIsEditModalOpen(false)
+    } else {
+      alert("Erro ao remover tarefa")
+      return setIsEditModalOpen(false)
+    }
   }
 
   return (
@@ -80,7 +90,11 @@ export default function Home() {
         </Styled.SectionSearch>
       </Styled.Section>
       <Styled.SectionList>
-        <TaskList handleSelectedTask={handleSelectedTask} isModalOpen={isEditModalOpen} />
+        <TaskList
+          handleSelectedTask={handleSelectedTask}
+          isModalOpen={isModalOpen}
+          isEditModalOpen={isEditModalOpen}
+        />
       </Styled.SectionList>
 
       {isModalOpen && (
@@ -143,7 +157,7 @@ export default function Home() {
 
             <Styled.SectionModalButton>
               <Button onClick={() => handleSalveEdit(idToEdit)} variant='primary' title='Salvar' style={{ width: '8rem' }} />
-              <Button onClick={() => setIsEditModalOpen(false)} variant='secondary' title='Excluir' style={{ width: '8rem' }} />
+              <Button onClick={() => handleRemoveTask(idToEdit)} variant='secondary' title='Excluir' style={{ width: '8rem' }} />
             </Styled.SectionModalButton>
           </Styled.SectionModal>
         </Modal>

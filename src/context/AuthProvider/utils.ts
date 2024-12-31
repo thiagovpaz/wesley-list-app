@@ -46,7 +46,6 @@ export async function SignUpRequest(name: string, email: string, password: strin
     return response.data;
 
   } catch (err) {
-    console.log('err', err)
     if (err?.response?.status === 500) {
       return window.alert('E-mail ja cadastrado')
     }

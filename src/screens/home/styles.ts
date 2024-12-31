@@ -1,15 +1,15 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  position: relative;
+  position: absolute;
   
   display: flex;
   flex: 1;
   flex-direction: column;
 
-  height: 100vh;
-  width: 100vw;
+  top: 0;
 
+  width: 100%;
   justify-content: center;
   align-items: center;
 `;
@@ -17,11 +17,18 @@ export const Container = styled.div`
 export const Section = styled.section`
   display: flex;
   flex: 1;
-  width: 100vh;
+  width: 90%; /* Ajusta o tamanho para ocupar quase toda a largura da tela */
   align-items: center;
-
   flex-direction: column;
 `;
+
+export const SectionList = styled.section`
+  display: flex;
+  flex: 1;
+  width: 90%; 
+  backgroung-color: 'red';
+`;
+
 
 export const SectionSearch = styled.section`
   display: flex;

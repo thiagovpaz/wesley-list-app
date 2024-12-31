@@ -18,6 +18,7 @@ $ npm install
 ```bash
 # development
 $ npm run dev
+```
 
 ## Expanding the ESLint configuration
 

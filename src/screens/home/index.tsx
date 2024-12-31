@@ -16,12 +16,17 @@ export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [idToEdit, setIdToEdit] = useState(0);
+  const [search, setSearch] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [status, setStatus] = useState("pendente");
 
   function handleOpenModal() {
     setIsModalOpen(true);
+  }
+
+  function handleFilter() {
+    alert("Funcionalidade ainda em desenvolvimento... 🔨")
   }
 
   function handleCloseModal() {
@@ -84,13 +89,14 @@ export default function Home() {
       <h1>Gerenciamento de tarefas</h1>
       <Styled.Section>
         <Styled.SectionSearch>
-          <Search placeholder='Pesquisar tarefa...' />
+          <Search placeholder='Pesquisar tarefa...' onChange={e => setSearch(e.target.value)} />
           <ButtonIcon typeIcon='add' style={{ marginLeft: 10 }} onClick={handleOpenModal} />
-          <ButtonIcon typeIcon='filter' style={{ marginLeft: 10 }} />
+          <ButtonIcon typeIcon='filter' style={{ marginLeft: 10 }} onClick={handleFilter} />
         </Styled.SectionSearch>
       </Styled.Section>
       <Styled.SectionList>
         <TaskList
+          search={search}
           handleSelectedTask={handleSelectedTask}
           isModalOpen={isModalOpen}
           isEditModalOpen={isEditModalOpen}

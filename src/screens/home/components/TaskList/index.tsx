@@ -12,12 +12,13 @@ type Task = {
 };
 
 type TaskListProps = {
-    handleSelectedTask(id: number): void;
+    search: string;
     isModalOpen?: boolean;
     isEditModalOpen?: boolean;
+    handleSelectedTask(id: number): void;
 }
 
-const TaskList = ({ handleSelectedTask, isModalOpen, isEditModalOpen }: TaskListProps) => {
+const TaskList = ({ handleSelectedTask, isModalOpen, isEditModalOpen, search }: TaskListProps) => {
     const [tasks, setTasks] = useState<Task[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
     const totalPages = useRef(0);
@@ -49,6 +50,10 @@ const TaskList = ({ handleSelectedTask, isModalOpen, isEditModalOpen }: TaskList
         setCurrentPage(page);
     };
 
+    const filteredTasks = search.length > 1
+        ? tasks.filter((task) => task.title.toLowerCase().includes(search.toLowerCase()))
+        : tasks;
+
     return (
         <div>
             {loading ? (
@@ -56,15 +61,22 @@ const TaskList = ({ handleSelectedTask, isModalOpen, isEditModalOpen }: TaskList
             ) : (
                 <>
                     <Styled.Container>
-                        {tasks.map((task) => (
-                            <Styled.TaskCard key={task.id} onClick={() => handleSelectedTask(task.id)}>
-                                <h3>{task.title}</h3>
-                                <p>{task.description}</p>
-                                <p>
-                                    Status: <strong>{task.status}</strong>
-                                </p>
-                            </Styled.TaskCard>
-                        ))}
+                        {filteredTasks.length > 0 ? (
+                            filteredTasks.map((task) => (
+                                <Styled.TaskCard
+                                    key={task.id}
+                                    onClick={() => handleSelectedTask(task.id)}
+                                >
+                                    <h3>{task.title}</h3>
+                                    <p>{task.description}</p>
+                                    <p>
+                                        Status: <strong>{task.status}</strong>
+                                    </p>
+                                </Styled.TaskCard>
+                            ))
+                        ) : (
+                            <p>Nenhuma tarefa encontrada.</p>
+                        )}
                     </Styled.Container>
 
                     <Styled.Pagination>

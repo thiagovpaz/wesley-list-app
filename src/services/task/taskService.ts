@@ -52,10 +52,12 @@ export async function GetTasks(page: number) {
                 }
             );
 
-            return response;
+            console.log(response);
+
+            return response.data;
 
         } catch (err) {
-            return window.alert('Erro ao buscar tarefas');
+            window.alert('Erro ao buscar tarefas');
         }
     } else {
         window.alert('Erro ao buscar tarefas');

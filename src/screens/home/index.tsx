@@ -1,16 +1,21 @@
-import { useEffect, useState } from 'react';
-import { ButtonIcon } from '../../components/ButtonIcon';
-import Modal from '../../components/Modal';
-import { Search } from '../../components/Search';
+import { useState } from "react";
+import { ButtonIcon } from "../../components/ButtonIcon";
+import Modal from "../../components/Modal";
+import { Search } from "../../components/Search";
 
-import { Button } from '../../components/Button';
-import { Input } from '../../components/Input';
-import { colors } from '../../global/colors';
+import { Button } from "../../components/Button";
+import { Input } from "../../components/Input";
+import { colors } from "../../global/colors";
 
-import { CreateTask, EditTask, GetOneTask, RemoveTask } from '../../services/task/taskService';
-import * as Styled from './styles';
-import TaskList from './components/TaskList';
-import { Profile } from '../../components/Profile';
+import {
+  CreateTask,
+  EditTask,
+  GetOneTask,
+  RemoveTask,
+} from "../../services/task/taskService";
+import * as Styled from "./styles";
+import TaskList from "./components/TaskList";
+import { Profile } from "../../components/Profile";
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -26,7 +31,7 @@ export default function Home() {
   }
 
   function handleFilter() {
-    alert("Funcionalidade ainda em desenvolvimento... 🔨")
+    alert("Funcionalidade ainda em desenvolvimento... 🔨");
   }
 
   function handleCloseModal() {
@@ -38,48 +43,47 @@ export default function Home() {
   }
 
   async function handleCreateTask() {
-
     if (title === "") {
-      return alert("Preencha o título")
+      return alert("Preencha o título");
     }
 
     if (description === "") {
-      return alert("Preencha a descrição")
+      return alert("Preencha a descrição");
     }
     const data = await CreateTask(title, description, status);
     if (data?.status === 201) {
-      handleCloseModal()
+      handleCloseModal();
     }
-    return
+    return;
   }
 
   async function handleSalveEdit(id: number) {
-    const data = await EditTask(id, title, description, status)
+    const data = await EditTask(id, title, description, status);
     if (data?.status === 200) {
-      alert("tarefa atualizada!")
-      return setIsEditModalOpen(false)
+      alert("tarefa atualizada!");
+      return setIsEditModalOpen(false);
     }
-    return alert("Erro ao editar")
+    return alert("Erro ao editar");
   }
 
   async function handleSelectedTask(id: number) {
-    setIdToEdit(id)
-    const data = await GetOneTask(id)
-    setTitle(data?.data?.title)
-    setStatus(data?.data?.status)
-    setDescription(data?.data?.description)
-    setIsEditModalOpen(true)
-    return
+    setIdToEdit(id);
+    const data = await GetOneTask(id);
+    setTitle(data?.data?.title);
+    setStatus(data?.data?.status);
+    setDescription(data?.data?.description);
+    setIsEditModalOpen(true);
+    return;
   }
 
   async function handleRemoveTask(id: number) {
     const data = await RemoveTask(id);
     if (data?.status == 200) {
-      alert("Tarefa removida")
-      return setIsEditModalOpen(false)
+      alert("Tarefa removida");
+      return setIsEditModalOpen(false);
     } else {
-      alert("Erro ao remover tarefa")
-      return setIsEditModalOpen(false)
+      alert("Erro ao remover tarefa");
+      return setIsEditModalOpen(false);
     }
   }
 
@@ -89,9 +93,20 @@ export default function Home() {
       <h1>Gerenciamento de tarefas</h1>
       <Styled.Section>
         <Styled.SectionSearch>
-          <Search placeholder='Pesquisar tarefa...' onChange={e => setSearch(e.target.value)} />
-          <ButtonIcon typeIcon='add' style={{ marginLeft: 10 }} onClick={handleOpenModal} />
-          <ButtonIcon typeIcon='filter' style={{ marginLeft: 10 }} onClick={handleFilter} />
+          <Search
+            placeholder="Pesquisar tarefa..."
+            onChange={(e) => setSearch(e.target.value)}
+          />
+          <ButtonIcon
+            typeIcon="add"
+            style={{ marginLeft: 10 }}
+            onClick={handleOpenModal}
+          />
+          <ButtonIcon
+            typeIcon="filter"
+            style={{ marginLeft: 10 }}
+            onClick={handleFilter}
+          />
         </Styled.SectionSearch>
       </Styled.Section>
       <Styled.SectionList>
@@ -107,8 +122,16 @@ export default function Home() {
         <Modal onClose={handleCloseModal}>
           <h2 style={{ color: colors.gray[600] }}>Adicionar nova tarefa</h2>
           <Styled.SectionModal>
-            <Input placeholder='Título' style={{ marginBottom: 20 }} onChange={(e) => setTitle(e.target.value)} />
-            <Input placeholder='Descrição' style={{ marginBottom: 20 }} onChange={(e) => setDescription(e.target.value)} />
+            <Input
+              placeholder="Título"
+              style={{ marginBottom: 20 }}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+            <Input
+              placeholder="Descrição"
+              style={{ marginBottom: 20 }}
+              onChange={(e) => setDescription(e.target.value)}
+            />
 
             <select
               value={status}
@@ -116,11 +139,11 @@ export default function Home() {
               style={{
                 backgroundColor: colors.gray[400],
                 marginBottom: 20,
-                width: '8rem',
-                padding: '0.5rem',
-                outline: 'none',
-                borderRadius: '4px',
-                fontSize: '1rem',
+                width: "8rem",
+                padding: "0.5rem",
+                outline: "none",
+                borderRadius: "4px",
+                fontSize: "1rem",
               }}
             >
               <option value="pendente">Pendente</option>
@@ -129,8 +152,18 @@ export default function Home() {
             </select>
 
             <Styled.SectionModalButton>
-              <Button onClick={handleCreateTask} variant='primary' title='Adicionar' style={{ width: '8rem' }} />
-              <Button onClick={handleCloseModal} variant='secondary' title='Fechar' style={{ width: '8rem' }} />
+              <Button
+                onClick={handleCreateTask}
+                variant="primary"
+                title="Adicionar"
+                style={{ width: "8rem" }}
+              />
+              <Button
+                onClick={handleCloseModal}
+                variant="secondary"
+                title="Fechar"
+                style={{ width: "8rem" }}
+              />
             </Styled.SectionModalButton>
           </Styled.SectionModal>
         </Modal>
@@ -140,8 +173,18 @@ export default function Home() {
         <Modal onClose={() => setIsEditModalOpen(false)}>
           <h2 style={{ color: colors.gray[600] }}>Editar tarefa</h2>
           <Styled.SectionModal>
-            <Input value={title} placeholder='Título' style={{ marginBottom: 20 }} onChange={(e) => setTitle(e.target.value)} />
-            <Input value={description} placeholder='Descrição' style={{ marginBottom: 20 }} onChange={(e) => setDescription(e.target.value)} />
+            <Input
+              value={title}
+              placeholder="Título"
+              style={{ marginBottom: 20 }}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+            <Input
+              value={description}
+              placeholder="Descrição"
+              style={{ marginBottom: 20 }}
+              onChange={(e) => setDescription(e.target.value)}
+            />
 
             <select
               value={status}
@@ -149,11 +192,11 @@ export default function Home() {
               style={{
                 backgroundColor: colors.gray[400],
                 marginBottom: 20,
-                width: '8rem',
-                padding: '0.5rem',
-                outline: 'none',
-                borderRadius: '4px',
-                fontSize: '1rem',
+                width: "8rem",
+                padding: "0.5rem",
+                outline: "none",
+                borderRadius: "4px",
+                fontSize: "1rem",
               }}
             >
               <option value="pendente">Pendente</option>
@@ -162,8 +205,18 @@ export default function Home() {
             </select>
 
             <Styled.SectionModalButton>
-              <Button onClick={() => handleSalveEdit(idToEdit)} variant='primary' title='Salvar' style={{ width: '8rem' }} />
-              <Button onClick={() => handleRemoveTask(idToEdit)} variant='secondary' title='Excluir' style={{ width: '8rem' }} />
+              <Button
+                onClick={() => handleSalveEdit(idToEdit)}
+                variant="primary"
+                title="Salvar"
+                style={{ width: "8rem" }}
+              />
+              <Button
+                onClick={() => handleRemoveTask(idToEdit)}
+                variant="secondary"
+                title="Excluir"
+                style={{ width: "8rem" }}
+              />
             </Styled.SectionModalButton>
           </Styled.SectionModal>
         </Modal>

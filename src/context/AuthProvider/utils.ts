@@ -1,3 +1,4 @@
+import { AxiosError } from 'axios';
 import { Api } from '../../services/api';
 import { IUser } from "./types";
 
@@ -46,7 +47,7 @@ export async function SignUpRequest(name: string, email: string, password: strin
     return response.data;
 
   } catch (err) {
-    if (err?.response?.status === 500) {
+    if (err instanceof AxiosError && err?.response?.status === 500) {
       return window.alert('E-mail ja cadastrado')
     }
     window.alert(

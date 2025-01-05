@@ -16,7 +16,7 @@ function App() {
     }
   }
 
-  const Private = (Item: any) => {
+  const Private = ({ Item }: any) => {
     return user == true ? <Item /> : <Login />;
   };
 

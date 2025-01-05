@@ -1,4 +1,4 @@
-import axios from "axios";
+import { Api } from '../../services/api';
 import { IUser } from "./types";
 
 export function setUserLocalStorage(user: IUser | null) {
@@ -19,7 +19,7 @@ export function getUserLocalStorage() {
 export async function LoginRequest(email: string, password: string) {
 
   try {
-    const response = await axios.post('http://localhost:3000/login',
+    const response = await Api.post('/login',
       JSON.stringify({ email, password }),
       {
         headers: { 'Content-Type': 'application/json' }
@@ -36,7 +36,7 @@ export async function LoginRequest(email: string, password: string) {
 export async function SignUpRequest(name: string, email: string, password: string) {
 
   try {
-    const response = await axios.post('http://localhost:3000/user',
+    const response = await Api.post('/user',
       JSON.stringify({ name, email, password }),
       {
         headers: { 'Content-Type': 'application/json' }
@@ -63,7 +63,7 @@ export async function SignUpRequest(name: string, email: string, password: strin
 
 export async function GetUSers(token: string) {
   try {
-    const response = await axios.get('http://localhost:3000/user', {
+    const response = await Api.get('/user', {
       headers: {
         'Content-Type': 'application/json',
         'authorization': `Bearer ${token}`

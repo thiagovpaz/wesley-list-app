@@ -1,4 +1,4 @@
-import axios from "axios";
+import { Api } from '../api';
 
 export function getAccessToken() {
     const json = localStorage.getItem('user');
@@ -17,8 +17,8 @@ export async function CreateTask(title: string, description: string, status: str
     const access_token = getAccessToken();
     if (access_token) {
         try {
-            const response = await axios.post(
-                'http://localhost:3000/task',
+            const response = await Api.post(
+                '/task',
                 JSON.stringify({ title, description, status }),
                 {
                     headers: {
@@ -42,8 +42,8 @@ export async function GetTasks(page: number) {
     const access_token = getAccessToken();
     if (access_token) {
         try {
-            const response = await axios.get(
-                `http://localhost:3000/task?page=${page}&limit=6`,
+            const response = await Api.get(
+                `/task?page=${page}&limit=6`,
                 {
                     headers: {
                         'Content-Type': 'application/json',
@@ -66,8 +66,8 @@ export async function GetOneTask(id: number) {
     const access_token = getAccessToken();
     if (access_token) {
         try {
-            const response = await axios.get(
-                `http://localhost:3000/task/${id}`,
+            const response = await Api.get(
+                `/task/${id}`,
                 {
                     headers: {
                         'Content-Type': 'application/json',
@@ -90,8 +90,8 @@ export async function EditTask(id: number, title: string, description: string, s
     const access_token = getAccessToken();
     if (access_token) {
         try {
-            const response = await axios.patch(
-                `http://localhost:3000/task/${id}`,
+            const response = await Api.patch(
+                `/task/${id}`,
                 {
                     title,
                     description,
@@ -119,8 +119,8 @@ export async function RemoveTask(id: number) {
     const access_token = getAccessToken();
     if (access_token) {
         try {
-            const response = await axios.delete(
-                `http://localhost:3000/task/${id}`,
+            const response = await Api.delete(
+                `/task/${id}`,
                 {
                     headers: {
                         'Content-Type': 'application/json',
